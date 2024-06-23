@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ranksterr.Mobile", "Ranksterr.Mobile\Ranksterr.Mobile.csproj", "{7B8EA7E9-7AFF-4A6A-8D5A-8930DF526B39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ranksterr.Domain", "Ranksterr.Domain\Ranksterr.Domain.csproj", "{94B1B3DE-9F60-46F1-8B1A-2B046AF97C00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ranksterr.Application", "Ranksterr.Application\Ranksterr.Application.csproj", "{04F54F92-34AA-4D74-B72C-6DE2FEDD3100}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ranksterr.Infrastructure", "Ranksterr.Infrastructure\Ranksterr.Infrastructure.csproj", "{663364CC-654F-4C64-9949-5F1B83378C9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ranksterr.Api", "Ranksterr.Api\Ranksterr.Api.csproj", "{049617B4-3C73-4732-B89B-174E3113103D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4D6E196E-26D8-4D07-A418-41687179011B}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{33848825-666F-4A15-8273-1EFF8A4643E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{29FD3E95-84D5-4079-B976-501FEF346C61}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B8EA7E9-7AFF-4A6A-8D5A-8930DF526B39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B8EA7E9-7AFF-4A6A-8D5A-8930DF526B39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B8EA7E9-7AFF-4A6A-8D5A-8930DF526B39}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7B8EA7E9-7AFF-4A6A-8D5A-8930DF526B39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B8EA7E9-7AFF-4A6A-8D5A-8930DF526B39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B8EA7E9-7AFF-4A6A-8D5A-8930DF526B39}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{94B1B3DE-9F60-46F1-8B1A-2B046AF97C00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94B1B3DE-9F60-46F1-8B1A-2B046AF97C00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94B1B3DE-9F60-46F1-8B1A-2B046AF97C00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94B1B3DE-9F60-46F1-8B1A-2B046AF97C00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04F54F92-34AA-4D74-B72C-6DE2FEDD3100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04F54F92-34AA-4D74-B72C-6DE2FEDD3100}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04F54F92-34AA-4D74-B72C-6DE2FEDD3100}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04F54F92-34AA-4D74-B72C-6DE2FEDD3100}.Release|Any CPU.Build.0 = Release|Any CPU
+		{663364CC-654F-4C64-9949-5F1B83378C9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{663364CC-654F-4C64-9949-5F1B83378C9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{663364CC-654F-4C64-9949-5F1B83378C9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{663364CC-654F-4C64-9949-5F1B83378C9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{049617B4-3C73-4732-B89B-174E3113103D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{049617B4-3C73-4732-B89B-174E3113103D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{049617B4-3C73-4732-B89B-174E3113103D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{049617B4-3C73-4732-B89B-174E3113103D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AF161D94-EECC-4078-BD44-7D8ECE7D6D60}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{049617B4-3C73-4732-B89B-174E3113103D} = {33848825-666F-4A15-8273-1EFF8A4643E5}
+		{94B1B3DE-9F60-46F1-8B1A-2B046AF97C00} = {33848825-666F-4A15-8273-1EFF8A4643E5}
+		{04F54F92-34AA-4D74-B72C-6DE2FEDD3100} = {33848825-666F-4A15-8273-1EFF8A4643E5}
+		{663364CC-654F-4C64-9949-5F1B83378C9F} = {33848825-666F-4A15-8273-1EFF8A4643E5}
+		{7B8EA7E9-7AFF-4A6A-8D5A-8930DF526B39} = {33848825-666F-4A15-8273-1EFF8A4643E5}
+	EndGlobalSection
+EndGlobal

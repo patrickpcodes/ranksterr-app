@@ -1,0 +1,6 @@
+﻿services:
+  ranksterr.api:
+    image: ranksterr.api
+    build:
+      context: .
+      dockerfile: Ranksterr.Api/Dockerfile
