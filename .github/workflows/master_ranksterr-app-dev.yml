@@ -23,12 +23,14 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        cd: Ranksterr.Api/
-        run: dotnet build --configuration Release
+        run: |
+            cd Ranksterr.Api/
+            dotnet build --configuration Release
 
       - name: dotnet publish
-        cd: Ranksterr.Api/
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: |
+            cd Ranksterr.Api/
+            dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
