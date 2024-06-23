@@ -6,43 +6,49 @@ using TMDbLib.Client;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.Search;
 
-var builder = WebApplication.CreateBuilder(args);
+namespace Ranksterr.Api;
+
+public class Program
+{
+    public static void Main( string[] args )
+    {
+        var builder = WebApplication.CreateBuilder( args );
 
 // Add services to the container.
-builder.Services.AddCors();
-builder.Services.AddControllers();
+        builder.Services.AddCors();
+        builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
 
-builder.Services.AddCors( options => options.AddPolicy( "AllowAll", p => p.AllowAnyOrigin()
-                                                                          .AllowAnyMethod()
-                                                                          .AllowAnyHeader() ) );
+        builder.Services.AddCors( options => options.AddPolicy( "AllowAll", p => p.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader() ) );
 //TODO make sure order is correct on this
-builder.Services.AddInfrastructure(builder.Configuration);
+        builder.Services.AddInfrastructure( builder.Configuration );
 
-var app = builder.Build();
+        var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+        if ( app.Environment.IsDevelopment() )
+        {
+            app.UseSwagger();
+            app.UseSwaggerUI();
+        }
 
-app.UseHttpsRedirection();
-app.UseDefaultFiles();
-app.UseStaticFiles();
+        app.UseHttpsRedirection();
+        app.UseDefaultFiles();
+        app.UseStaticFiles();
 
-app.UseAuthorization();
+        app.UseAuthorization();
 
-app.UseCors( b =>
-    b.AllowAnyOrigin()
-           .AllowAnyMethod()
-           .AllowAnyHeader() );
+        app.UseCors( b =>
+            b.AllowAnyOrigin()
+             .AllowAnyMethod()
+             .AllowAnyHeader() );
 
-app.MapControllers();
-app.MapFallbackToFile( "index.html" );
+        app.MapControllers();
+        app.MapFallbackToFile( "index.html" );
 
 // app.MapEndpoints();
 
@@ -87,4 +93,6 @@ app.MapFallbackToFile( "index.html" );
 
 //app.Urls.Add("https://0.0.0.0:7297");
 
-app.Run();
+        app.Run();
+    }
+}

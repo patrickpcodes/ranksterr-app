@@ -1,4 +1,4 @@
-namespace Ranksterr.Infrastructure.UnitTests;
+namespace Ranksterr.Api.IntegrationTests;
 
 public class Tests
 {
@@ -8,7 +8,7 @@ public class Tests
     }
 
     [Test]
-    public void InfrastructureTest1()
+    public void Test1()
     {
         Assert.Pass();
     }
