@@ -36,10 +36,11 @@ jobs:
           
       - name: Install dependencies
         run: |
-          dotnet workload install android --ignore-failed-sources|
-          dotnet workload install ios --ignore-failed-sources
-          dotnet workload install maccatalyst --ignore-failed-sources
+          dotnet workload install android --ignore-failed-sources
+#          dotnet workload install ios --ignore-failed-sources
+#          dotnet workload install maccatalyst --ignore-failed-sources
           dotnet workload install maui --ignore-failed-sources
+      
       - name: Restore all projects
         run: dotnet restore
           
