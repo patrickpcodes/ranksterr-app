@@ -32,12 +32,13 @@ jobs:
         with:
           dotnet-version: '8.x'
           include-prerelease: true
-      - name: Store secret in environment variable
-        run: echo "CONFIG_CONTENT=${{secrets.RANKSTERR_API_APPSETTINGS }}" >> $GITHUB_ENV
-
       - name: Write secret to config file
+        env:
+          API_SETTINGS: ${{secrets.RANKSTERR_API_APPSETTINGS}}
+        shell: bash
         run: |
-          echo "$CONFIG_CONTENT" | jq '.' > Ranksterr.Api/appsettings.dev.json
+            echo "$API_SETTINGS" >> config.ini
+            cat config.ini
         
       - name: Build with dotnet
         run: |
