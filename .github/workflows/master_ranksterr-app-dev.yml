@@ -34,7 +34,7 @@ jobs:
           include-prerelease: true
       - name: Update api config file with secrets
         run: |
-          echo "${{ secrets.RANKSTERR_API_APPSETTINGS }}" | jq > Ranksterr.Api/appsettings.dev.json
+          echo "${{ secrets.RANKSTERR_API_APPSETTINGS }}" | jq '.' > Ranksterr.Api/appsettings.dev.json
         
       - name: Build with dotnet
         run: |
