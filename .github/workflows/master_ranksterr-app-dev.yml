@@ -37,8 +37,8 @@ jobs:
           API_SETTINGS: ${{secrets.RANKSTERR_API_APPSETTINGS}}
         shell: bash
         run: |
-            echo "$API_SETTINGS" >> Ranksterr.Api/appsettings.json
-            cat Ranksterr.Api/appsettings.json
+            echo "$API_SETTINGS" >> Ranksterr.Api/appsettings.test.json
+            cat Ranksterr.Api/appsettings.test.json
         
       - name: Build with dotnet
         run: |
