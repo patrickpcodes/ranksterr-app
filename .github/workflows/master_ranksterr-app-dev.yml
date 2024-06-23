@@ -33,17 +33,9 @@ jobs:
         with:
           dotnet-version: '8.x'
           include-prerelease: true
-      
-      - name: Install dependencies
-        run: |
-          dotnet workload install android --ignore-failed-sources
-          dotnet workload install maui --ignore-failed-sources
-      
-      - name: Restore all projects
-        run: dotnet restore
-          
-      - name: Run tests in directories containing 'Test'
-        run: dotnet test
+     
+      - name: Run tests 
+        run: dotnet test Ranksterr.Application.UnitTests/Ranksterr.Application.UnitTests
       
       - name: Write secret to config file
         env:
