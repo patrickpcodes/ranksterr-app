@@ -33,7 +33,7 @@ jobs:
           dotnet-version: '8.x'
           include-prerelease: true
       - name: Update api config file with secrets
-        run: echo "${{ secrets.RANKSTERR_API_APPSETTINGS }}" > Ranksterr.Api/appsettings.json
+        run: echo "${{ secrets.RANKSTERR_API_APPSETTINGS }}" > Ranksterr.Api/appsettings.dev.json
         
       - name: Build with dotnet
         run: |
