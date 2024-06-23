@@ -10,6 +10,6 @@ public class Tests
     [Test]
     public void InfrastructureTest1()
     {
-        Assert.Pass();
+        Assert.Fail();
     }
 }

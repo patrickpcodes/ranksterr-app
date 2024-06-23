@@ -21,4 +21,8 @@
         <Using Include="NUnit.Framework"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Ranksterr.Application\Ranksterr.Application.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -35,7 +35,9 @@ jobs:
           include-prerelease: true
      
       - name: Run tests 
-        run: dotnet test Ranksterr.Application.UnitTests/Ranksterr.Application.UnitTests.csproj
+        run: | 
+          dotnet test Ranksterr.Application.UnitTests/Ranksterr.Application.UnitTests.csproj
+          dotnet test Ranksterr.Infrastructure.UnitTests/Ranksterr.Infrastructure.UnitTests.csproj
       
       - name: Write secret to config file
         env:
