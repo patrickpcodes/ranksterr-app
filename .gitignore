@@ -398,3 +398,5 @@ FodyWeavers.xsd
 *.sln.iml
 
 Ranksterr.Api/appsettings.Development.json
+
+Ranksterr.Api/wwwroot/

@@ -9,12 +9,15 @@ using TMDbLib.Objects.Search;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddCors();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors( options => options.AddPolicy( "AllowAll", p => p.AllowAnyOrigin()
+                                                                          .AllowAnyMethod()
+                                                                          .AllowAnyHeader() ) );
 //TODO make sure order is correct on this
 builder.Services.AddInfrastructure(builder.Configuration);
 
@@ -28,10 +31,20 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
 app.UseAuthorization();
 
+app.UseCors( b =>
+    b.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader() );
+
 app.MapControllers();
+app.MapFallbackToFile( "index.html" );
+
+// app.MapEndpoints();
 
 // app.MapGet("/api/values", async (ILogger<Program> logger, IConfiguration configuration) =>
 // {

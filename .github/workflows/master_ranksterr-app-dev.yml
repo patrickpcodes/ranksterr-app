@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy ASP.Net Core app to Azure Web App - ranksterr-app-dev
+name: Build and deploy React and ASP.Net Core app to Azure Web App - ranksterr-app-dev
 
 on:
   push:
@@ -16,6 +16,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'  # Specify the Node.js version you need
+
+      - name: Run npm script
+        run: |
+          cd ranksterr-react-app 
+          npm install      
+          npm run buildlinux
+          
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
@@ -24,13 +35,13 @@ jobs:
 
       - name: Build with dotnet
         run: |
-            cd Ranksterr.Api/
-            dotnet build --configuration Release
+          cd Ranksterr.Api/
+          dotnet build --configuration Release
 
       - name: dotnet publish
         run: |
-            cd Ranksterr.Api/
-            dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+          cd Ranksterr.Api/
+          dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -52,7 +63,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: .net-app
-      
+
       - name: Login to Azure
         uses: azure/login@v1
         with:
