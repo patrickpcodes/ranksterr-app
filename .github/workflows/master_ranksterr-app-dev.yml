@@ -39,10 +39,10 @@ jobs:
 
       - name: Run tests in directories containing 'Test'
         run: |
-          for dir in $(find . -type d -name '*Test*'); do
-            echo "Running tests in $dir"
-            dotnet test "$dir" --configuration Release --no-build --verbosity normal
-          done    
+          for project in $(find . -type f -name '*.csproj' -path '*/Test/*'); do
+            echo "Running tests in $project"
+            dotnet test "$project" --configuration Release --no-build --verbosity normal
+          done  
             
       - name: Write secret to config file
         env:
