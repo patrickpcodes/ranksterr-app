@@ -25,7 +25,7 @@ jobs:
         run: |
           cd ranksterr-react-app 
           npm install      
-          npm run test
+          npm run test > ranksterr-react-app-TestResults.xml
           npm run buildlinux
           
       - name: Set up .NET Core
@@ -39,6 +39,14 @@ jobs:
           dotnet test Ranksterr.Application.UnitTests/Ranksterr.Application.UnitTests.csproj
           dotnet test Ranksterr.Infrastructure.UnitTests/Ranksterr.Infrastructure.UnitTests.csproj
           dotnet test Ranksterr.Api.IntegrationTests/Ranksterr.Api.IntegrationTests.csproj
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: |
+            *.xml
+            !config.xml
       
       - name: Write secret to config file
         env:
