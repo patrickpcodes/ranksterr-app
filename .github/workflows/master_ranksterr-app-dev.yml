@@ -38,12 +38,8 @@ jobs:
 #        run: dotnet restore
 
       - name: Run tests in directories containing 'Test'
-        run: |
-          for project in $(find . -type f -name '*.csproj' -path '*/Test/*'); do
-            echo "Running tests in $project"
-            dotnet test "$project" --configuration Release --no-build --verbosity normal
-          done  
-            
+        run: dotnet test
+      
       - name: Write secret to config file
         env:
           API_SETTINGS: ${{secrets.RANKSTERR_API_APPSETTINGS}}
