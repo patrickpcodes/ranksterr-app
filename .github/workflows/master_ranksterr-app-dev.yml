@@ -23,7 +23,7 @@ jobs:
      
       - name: Run tests 
         run: | 
-          dotnet test Ranksterr.Application.UnitTests/Ranksterr.Application.UnitTests.csproj --configuration Release --logger "trx;LogFileName=test-results-RApp.trx" 
+          dotnet test Ranksterr.Application.UnitTests/Ranksterr.Application.UnitTests.csproj --configuration Release --logger "trx;LogFileName=test-results-RApp.trx" || true
          
       - name: Test Report for C#
         uses: dorny/test-reporter@v1
