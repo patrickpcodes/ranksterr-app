@@ -24,10 +24,18 @@ jobs:
           dotnet-version: '8.x'
           include-prerelease: true
      
-      - name: Run tests 
+      - name: Run Ranksterr Application Tests 
         run: | 
           dotnet test Ranksterr.Application.UnitTests/Ranksterr.Application.UnitTests.csproj --configuration Release --logger "trx;LogFileName=test-results-RApp.trx" || true
-         
+      
+      - name: Run Ranksterr Infrastructure Tests
+        run: |
+          dotnet test Ranksterr.Application.Infrastructure/Ranksterr.Application.Infrastructure.csproj --configuration Release --logger "trx;LogFileName=test-results-RInf.trx" || true
+          
+      - name: Run Ranksterr Integration Tests
+        run: |
+          dotnet test Ranksterr.Application.IntegrationTests/Ranksterr.Application.IntegrationTests.csproj --configuration Release --logger "trx;LogFileName=test-results-RInt.trx" || true
+      
       - name: Test Report for C#
         uses: dorny/test-reporter@v1
         if: always()
