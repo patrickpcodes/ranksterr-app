@@ -31,14 +31,13 @@ jobs:
           cd ranksterr-next-app 
           npm install      
           npm run testJunit
-          npm run build        
 
       - name: Test Jest Junit Report
         uses: dorny/test-reporter@v1
         if: success() || failure()    # run this step even if previous step failed
         with:
           name: JEST Tests            # Name of the check run which will be created
-          path: reports/jest-*.xml    # Path to test results
+          path: "**/jest-*.xml"    # Path to test results
           reporter: jest-junit        # Format of test results
           fail-on-error: true
           token: ${{ secrets.GITHUB_TOKEN }}
