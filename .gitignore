@@ -400,3 +400,5 @@ FodyWeavers.xsd
 Ranksterr.Api/appsettings.Development.json
 
 Ranksterr.Api/wwwroot/
+
+ranksterr-next-app/reports/
