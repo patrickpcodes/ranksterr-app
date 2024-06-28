@@ -15,6 +15,24 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '8.x'
+          include-prerelease: true
+     
+      - name: Run tests 
+        run: | 
+          dotnet test Ranksterr.Application.UnitTests/Ranksterr.Application.UnitTests.csproj --configuration Release --logger "trx;LogFileName=test-results-RApp.trx" 
+         
+      - name: Test Report for C#
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: DotNET Tests
+          path: "**/test-results*.trx"
+          reporter: dotnet-trx
+          fail-on-error: true
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -28,24 +46,6 @@ jobs:
           npm run test
           npm run buildlinux
           
-      - name: Set up .NET Core
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '8.x'
-          include-prerelease: true
-     
-      - name: Run tests 
-        run: | 
-          dotnet test Ranksterr.Application.UnitTests/Ranksterr.Application.UnitTests.csproj --configuration $BUILD_CONFIG --logger "trx;LogFileName=test-results-RApp.trx" 
-         
-      - name: Test Report for C#
-        uses: dorny/test-reporter@v1
-        if: always()
-        with:
-          name: DotNET Tests
-          path: "**/test-results*.trx"
-          reporter: dotnet-trx
-          fail-on-error: true
             
       - name: Write secret to config file
         env:
