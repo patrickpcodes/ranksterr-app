@@ -30,11 +30,11 @@ jobs:
       
       - name: Run Ranksterr Infrastructure Tests
         run: |
-          dotnet test Ranksterr.Application.Infrastructure/Ranksterr.Application.Infrastructure.csproj --configuration Release --logger "trx;LogFileName=test-results-RInf.trx" || true
+          dotnet test Ranksterr.Infrastructure.UnitTests/Ranksterr.Infrastructure.UnitTests.csproj --configuration Release --logger "trx;LogFileName=test-results-RInf.trx" || true
           
       - name: Run Ranksterr Integration Tests
         run: |
-          dotnet test Ranksterr.Application.IntegrationTests/Ranksterr.Application.IntegrationTests.csproj --configuration Release --logger "trx;LogFileName=test-results-RInt.trx" || true
+          dotnet test Ranksterr.Api.IntegrationTests/Ranksterr.Api.IntegrationTests.csproj --configuration Release --logger "trx;LogFileName=test-results-RApiInt.trx" || true
       
       - name: Test Report for C#
         uses: dorny/test-reporter@v1
