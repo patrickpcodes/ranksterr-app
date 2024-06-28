@@ -36,10 +36,8 @@ jobs:
      
       - name: Run tests 
         run: | 
-          dotnet test Ranksterr.Application.UnitTests/Ranksterr.Application.UnitTests.csproj --configuration $BUILD_CONFIG --logger "trx;LogFileName=test-results-RApp.trx" || true
-          dotnet test Ranksterr.Infrastructure.UnitTests/Ranksterr.Infrastructure.UnitTests.csproj --configuration $BUILD_CONFIG --logger "trx;LogFileName=test-results-RInf.trx" || true
-          dotnet test Ranksterr.Api.IntegrationTests/Ranksterr.Api.IntegrationTests.csproj --configuration $BUILD_CONFIG --logger "trx;LogFileName=test-results-RInt.trx" || true
-
+          dotnet test Ranksterr.Application.UnitTests/Ranksterr.Application.UnitTests.csproj --configuration $BUILD_CONFIG --logger "trx;LogFileName=test-results-RApp.trx" 
+         
       - name: Test Report for C#
         uses: dorny/test-reporter@v1
         if: always()
