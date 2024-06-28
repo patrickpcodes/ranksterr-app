@@ -2,11 +2,16 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run clean && next build && npm run copy",
+    "clean": "del-cli -f \"..\\Ranksterr.Api\\wwwroot\\*\"",
+    "copy": "ncp out \"..\\Ranksterr.Api\\wwwroot\"",
     "start": "next start",
     "test": "jest --watchAll --coverage",
     "test:ci": "jest --ci",
-    "testJunit": "jest --ci --reporters=default --reporters=jest-junit"
+    "testJunit": "jest --ci --reporters=default --reporters=jest-junit",
+    "buildlinux": "npm run cleanlinux && next build && npm run copylinux",
+    "cleanlinux": "del-cli -f ../Ranksterr.Api/wwwroot/*",
+    "copylinux": "ncp out ../Ranksterr.Api/wwwroot/"
   },
   "dependencies": {
     "next": "latest",
@@ -22,7 +27,9 @@
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
     "typescript": "5.3.3",
-    "jest-junit": "^12.0.0"
+    "jest-junit": "^12.0.0",
+    "del-cli": "^5.0.0",
+    "ncp": "^2.0.0"
   },
   "jest-junit": {
     "outputDirectory": "reports",
