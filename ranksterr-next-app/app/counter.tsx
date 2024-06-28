@@ -7,8 +7,11 @@ export default function Counter() {
   return (
     <>
       <h2>{count}</h2>
-      <button type="button" onClick={() => setCount(count + 1)}>
+      <button title="add" type="button" onClick={() => setCount(count + 1)}>
         +
+      </button>
+      <button title="sub" type="button" onClick={() => setCount(count - 1)}>
+        -
       </button>
     </>
   );
