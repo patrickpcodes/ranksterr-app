@@ -12,7 +12,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
+    permissions:
+      checks: write  # Add this line to grant write permission for checks
+    
     steps:
       - uses: actions/checkout@v4
       - name: Set up .NET Core
@@ -33,6 +36,7 @@ jobs:
           path: "**/test-results*.trx"
           reporter: dotnet-trx
           fail-on-error: true
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
