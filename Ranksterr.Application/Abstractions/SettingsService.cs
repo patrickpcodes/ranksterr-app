@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
+using Ranksterr.Domain.Abstractions;
 
-namespace Ranksterr.Domain.Abstractions;
+namespace Ranksterr.Application.Abstractions;
 
 public class SettingsService<T>: ISettingsService<T> where T:class 
 {
@@ -15,9 +16,4 @@ public class SettingsService<T>: ISettingsService<T> where T:class
     {
         return _settings;
     }
-}
-
-public interface ISettingsService<T>
-{
-    public T GetSettings();
 }
