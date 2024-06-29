@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Ranksterr.Domain.Abstractions;
-using Ranksterr.Infrastructure.Migrations.App;
 
 namespace Ranksterr.Infrastructure.Repositories;
 

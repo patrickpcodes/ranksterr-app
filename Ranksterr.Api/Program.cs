@@ -1,12 +1,14 @@
 using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Linq;
 using Ranksterr.Api.Extensions;
 using Ranksterr.Application.Abstractions;
 using Ranksterr.Application.Authentication;
 using Ranksterr.Domain.Abstractions;
 using Ranksterr.Domain.Authentication;
-using Ranksterr.Domain.Tmdb;
 using Ranksterr.Infrastructure;
 using TMDbLib.Client;
 using TMDbLib.Objects.General;
@@ -40,7 +42,25 @@ public class Program
                                                                                   .AllowAnyHeader() ) );
         //TODO make sure order is correct on this
         builder.Services.AddInfrastructure( builder.Configuration );
-
+        builder.Services.AddAuthentication( options =>
+               {
+                   options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                   options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+               } )
+               .AddJwtBearer( options =>
+               {
+                   options.TokenValidationParameters = new TokenValidationParameters
+                   {
+                       ValidateIssuer = true,
+                       ValidateAudience = true,
+                       ValidateLifetime = true,
+                       ValidateIssuerSigningKey = true,
+                       ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+                       ValidAudience = builder.Configuration["JwtSettings:Audience"],
+                       IssuerSigningKey = new SymmetricSecurityKey( Encoding.UTF8.GetBytes( builder.Configuration["JwtSettings:SecretKey"])),
+                       ClockSkew = TimeSpan.Zero
+                   };
+               });
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -58,6 +78,7 @@ public class Program
         app.UseDefaultFiles();
         app.UseStaticFiles();
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.UseCors( b =>

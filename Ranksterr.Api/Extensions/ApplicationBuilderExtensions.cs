@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Ranksterr.Infrastructure;
-using Ranksterr.Infrastructure.Migrations.App;
 
 namespace Ranksterr.Api.Extensions;
 

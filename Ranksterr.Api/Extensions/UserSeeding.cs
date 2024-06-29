@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Ranksterr.Domain.Users;
 using Ranksterr.Infrastructure;
-using Ranksterr.Infrastructure.Migrations.App;
 
 namespace Ranksterr.Api.Extensions;
 

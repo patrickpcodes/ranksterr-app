@@ -9,7 +9,6 @@ using Ranksterr.Domain.Abstractions;
 using Ranksterr.Domain.Settings;
 using Ranksterr.Domain.Users;
 using Ranksterr.Infrastructure.Clock;
-using Ranksterr.Infrastructure.Migrations.App;
 using static Ranksterr.Infrastructure.AuthorizationConstants;
 
 namespace Ranksterr.Infrastructure;

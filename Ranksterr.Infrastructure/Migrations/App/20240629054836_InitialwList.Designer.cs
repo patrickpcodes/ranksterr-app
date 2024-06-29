@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Ranksterr.Infrastructure;
 
@@ -11,9 +12,11 @@ using Ranksterr.Infrastructure;
 namespace Ranksterr.Infrastructure.Migrations.App
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240629054836_InitialwList")]
+    partial class InitialwList
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -49,8 +52,8 @@ namespace Ranksterr.Infrastructure.Migrations.App
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
-                        .HasMaxLength(21)
-                        .HasColumnType("nvarchar(21)");
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -113,26 +116,6 @@ namespace Ranksterr.Infrastructure.Migrations.App
                     b.ToTable("outbox_messages", (string)null);
                 });
 
-            modelBuilder.Entity("Ranksterr.Domain.ListableItems.TvShowEpisodeItem", b =>
-                {
-                    b.HasBaseType("Ranksterr.Domain.ListableItems.ListItem");
-
-                    b.Property<string>("ImdbId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("ReleaseDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Thumbnail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TmdbId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasDiscriminator().HasValue("TvShowEpisodeItem");
-                });
-
             modelBuilder.Entity("Ranksterr.Domain.ListableItems.TvShowItem", b =>
                 {
                     b.HasBaseType("Ranksterr.Domain.ListableItems.ListItem");
@@ -149,21 +132,6 @@ namespace Ranksterr.Infrastructure.Migrations.App
 
                     b.Property<string>("TmdbId")
                         .HasColumnType("nvarchar(max)");
-
-                    b.ToTable("ListItem", t =>
-                        {
-                            t.Property("ImdbId")
-                                .HasColumnName("TvShowItem_ImdbId");
-
-                            t.Property("ReleaseDate")
-                                .HasColumnName("TvShowItem_ReleaseDate");
-
-                            t.Property("Thumbnail")
-                                .HasColumnName("TvShowItem_Thumbnail");
-
-                            t.Property("TmdbId")
-                                .HasColumnName("TvShowItem_TmdbId");
-                        });
 
                     b.HasDiscriminator().HasValue("TvShowItem");
                 });

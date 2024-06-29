@@ -1,24 +1,24 @@
 ﻿using Newtonsoft.Json.Linq;
 using Ranksterr.Domain.Abstractions;
-using Ranksterr.Domain.Listables;
 
-namespace Ranksterr.Domain.Tmdb;
+namespace Ranksterr.Domain.ListableItems;
 
-public class TmdbMovieItem : Listable
+public class TvShowItem : ListItem
 {
-    public int Id { get; set; }
-    public string Title { get; set; }
     public string Thumbnail { get; set; }
     public DateTime? ReleaseDate { get; set; }
-
+    public string? TmdbId { get; set; }
+    public string? ImdbId { get; set; }
+    
     public override void PutJson(JObject json)
     {
-        Id = JsonUtilities.GetInt(json, "id");
+        Id = JsonUtilities.GetGuid(json, "id");
         Title = JsonUtilities.GetString(json, "title");
         Thumbnail = JsonUtilities.GetString(json, "posterPath");
         ReleaseDate = JsonUtilities.GetNullableDateTime(json, "releaseDate");
+        TmdbId = JsonUtilities.GetString( json, "tmdbId" );
+        ImdbId = JsonUtilities.GetString( json, "imdbId" );
     }
-
     public override JObject GetJson()
     {
         var json = new JObject();
@@ -27,7 +27,9 @@ public class TmdbMovieItem : Listable
         JsonUtilities.Set(json, "title", Title);
         JsonUtilities.Set(json, "posterPath", Thumbnail);
         JsonUtilities.Set(json, "releaseDate", ReleaseDate);
-
+        JsonUtilities.Set(json, "tmdbId", TmdbId  );
+        JsonUtilities.Set(json, "imdbId", ImdbId  );
+        
         return json;
-    }
+    } 
 }

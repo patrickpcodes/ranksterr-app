@@ -1,17 +1,21 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Ranksterr.Application.Clock;
 using Ranksterr.Application.Exceptions;
 using Ranksterr.Domain.Abstractions;
-using Ranksterr.Domain.Users;
+using Ranksterr.Domain.ListableItems;
+using Ranksterr.Domain.Listables;
 using Ranksterr.Infrastructure.Outbox;
 
-namespace Ranksterr.Infrastructure.Migrations.App;
-
+namespace Ranksterr.Infrastructure;
 
 public sealed class ApplicationDbContext : DbContext, IUnitOfWork
 {
+    public DbSet<ItemList> ItemLists { get; set; }
+    public DbSet<MovieItem> MovieItems { get; set; }
+    public DbSet<TvShowItem> TvShowItems { get; set; }
+    public DbSet<TvShowEpisodeItem> TvShowEpisodeItems { get; set; }
+    public DbSet<ListItemAssignment> ListItemAssignments { get; set; }
     private static readonly JsonSerializerSettings JsonSerializerSettings = new()
     {
         TypeNameHandling = TypeNameHandling.All
@@ -29,6 +33,22 @@ public sealed class ApplicationDbContext : DbContext, IUnitOfWork
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<ListItem>().HasKey( li => li.Id );
+        
+        modelBuilder.Entity<ListItemAssignment>()
+                    .HasKey(lia => new { lia.ListId, lia.ListItemId });
+
+        modelBuilder.Entity<ListItemAssignment>()
+                    .HasOne(lia => lia.ItemList)
+                    .WithMany(l => l.ListItemAssignments)
+                    .HasForeignKey(lia => lia.ListId);
+
+        modelBuilder.Entity<ListItemAssignment>()
+                    .HasOne(lia => lia.ListItem)
+                    .WithMany()
+                    .HasForeignKey(lia => lia.ListItemId)
+                    .OnDelete(DeleteBehavior.Cascade); // Adjust delete behavior as needed
+        
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
         base.OnModelCreating(modelBuilder);
