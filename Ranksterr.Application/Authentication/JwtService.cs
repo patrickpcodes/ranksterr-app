@@ -22,7 +22,7 @@ public class JwtService : IJwtService
     public async Task<JwtToken> GenerateToken( UserManager<ApplicationUser> userManager, ApplicationUser user )
     {
         var claimList = await userManager.GetClaimsAsync( user );
-
+        var roleList = ( await userManager.GetRolesAsync( user ) ).Select( c => new Claim( ClaimTypes.Role, c ) );
         var expirationDate = new DateTimeOffset( DateTime.Now.AddMinutes( _jwtSettings.ExpiryInMinutes ) );
 
         var claims = new List<Claim>
@@ -32,12 +32,14 @@ public class JwtService : IJwtService
             new(JwtRegisteredClaimNames.Email, user.Email),
             new(JwtRegisteredClaimNames.Nbf, new DateTimeOffset( DateTime.Now ).ToUnixTimeSeconds().ToString()),
             new(JwtRegisteredClaimNames.Exp, expirationDate.ToUnixTimeSeconds().ToString()),
+            new("userId", user.Id.ToString()),
             new("username", user.UserName),
         };
 
-
         claims.AddRange( claimList );
-
+        claims.AddRange(roleList);
+        claims = claims.Distinct().ToList();
+        
         var key = new SymmetricSecurityKey( Encoding.UTF8.GetBytes( _jwtSettings.SecretKey ) );
         var credentials = new SigningCredentials( key, SecurityAlgorithms.HmacSha256 );
         var expiryDate = DateTime.UtcNow.AddMinutes( _jwtSettings.ExpiryInMinutes );

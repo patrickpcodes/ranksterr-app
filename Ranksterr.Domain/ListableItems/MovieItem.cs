@@ -1,8 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Ranksterr.Domain.Abstractions;
-using Ranksterr.Domain.ListableItems;
 
-namespace Ranksterr.Domain.Listables;
+namespace Ranksterr.Domain.ListableItems;
 
 public class MovieItem : ListItem
 {

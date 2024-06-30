@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Ranksterr.Domain.ListableItems;
-using Ranksterr.Domain.Listables;
 using Ranksterr.Infrastructure;
 
 namespace Ranksterr.Api.Controllers;
 [ApiController]
 [Route("api/")]
+[Authorize(AuthorizationConstants.ClaimPolicyIsAdmin)]
 public class TestingController : ControllerBase
 {
     private ApplicationDbContext _context;

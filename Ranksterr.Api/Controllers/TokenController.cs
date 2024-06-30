@@ -1,4 +1,6 @@
-﻿using System.Security.Claims;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -37,14 +39,15 @@ public class TokenController : ControllerBase
 
         return Results.BadRequest();
     }
-
+    [Authorize(Roles = "Admin")]
     [HttpGet( "users" )]
     public async Task<IResult> GetUsers()
     {
+        var temp = User;
         var user = await GetUserFromClaimsPrincipal( HttpContext.User, _userManager );
         if ( user == null )
         {
-            return Results.NotFound();
+            return Results.Conflict();
         }
 
         var claims = HttpContext.User.Claims.Select( c => new ClaimRecord() { Type = c.Type, Value = c.Value } )
@@ -63,24 +66,23 @@ public class TokenController : ControllerBase
         {
             var userId = Guid.Parse( claimsPrincipal
                                      .Claims.First( c =>
-                                         c.Type.Equals( Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames
-                                                                 .Sub ) )
+                                         c.Type.Equals("userId" ) )
                                      .Value );
             var user = await userManager.Users.FirstOrDefaultAsync( c => c.Id.Equals( userId ) );
             if ( user != null )
                 return user;
 
-            var username = claimsPrincipal.Claims.First( c =>
-                c.Type.Equals( Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Name ) ).Value;
-            user = await userManager.Users.FirstOrDefaultAsync( c => c.Email.Equals( username ) );
-            if ( user != null )
-                return user;
-
-            var userEmail = claimsPrincipal.Claims.First( c =>
-                c.Type.Equals( Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Email ) ).Value;
-            user = await userManager.Users.FirstOrDefaultAsync( c => c.Email.Equals( userEmail ) );
-            if ( user != null )
-                return user;
+            // var username = claimsPrincipal.Claims.First( c =>
+            //     c.Type.Equals( Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Name ) ).Value;
+            // user = await userManager.Users.FirstOrDefaultAsync( c => c.Email.Equals( username ) );
+            // if ( user != null )
+            //     return user;
+            //
+            // var userEmail = claimsPrincipal.Claims.First( c =>
+            //     c.Type.Equals( Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Email ) ).Value;
+            // user = await userManager.Users.FirstOrDefaultAsync( c => c.Email.Equals( userEmail ) );
+            // if ( user != null )
+            //     return user;
 
             return null;
         }

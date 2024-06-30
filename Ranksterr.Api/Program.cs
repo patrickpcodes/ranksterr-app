@@ -13,6 +13,7 @@ using Ranksterr.Infrastructure;
 using TMDbLib.Client;
 using TMDbLib.Objects.General;
 using TMDbLib.Objects.Search;
+using static Ranksterr.Infrastructure.AuthorizationConstants;
 
 namespace Ranksterr.Api;
 
@@ -61,6 +62,19 @@ public class Program
                        ClockSkew = TimeSpan.Zero
                    };
                });
+        builder.Services.AddAuthorization(options =>{
+            options.AddPolicy("RequireUserRole", policy => policy.RequireRole("User"));
+            
+            //TODO can require Role directly, don't need to use claims to handle rolls
+            //Need to test this out
+            //Can have separate policies for claims, like if people had separate data in their claims
+            //Like employee ID, or TITLE, or something else that we save
+            //Also can have just a claim or role, not necessarily a specific claim or role
+            options.AddPolicy( ClaimPolicyIsAdmin, policy =>
+                policy.RequireClaim( ClaimAccessLevelType, ClaimAccessLevelAdmin ) );
+        } ); 
+        
+        
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -70,8 +84,8 @@ public class Program
             app.UseSwaggerUI();
             
             
-            // app.ApplyMigrations();
-            // UserSeeding.SeedApplication(app);
+            app.ApplyMigrations();
+            UserSeeding.SeedApplication(app);
         }
 
         app.UseHttpsRedirection();
