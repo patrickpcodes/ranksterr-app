@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[Rosters]
+(
+	RosterId UNIQUEIDENTIFIER PRIMARY KEY,
+    UserId UNIQUEIDENTIFIER,
+    Name NVARCHAR(255),
+    Description NVARCHAR(1000),
+    CreatedAt DATETIME DEFAULT GETDATE()
+)

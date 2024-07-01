@@ -9,9 +9,9 @@ internal static class ApplicationBuilderExtensions
     {
         using IServiceScope scope = app.ApplicationServices.CreateScope();
 
-        using ApplicationDbContext dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-
-        dbContext.Database.Migrate();
+        // using ApplicationDbContext dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        //
+        // dbContext.Database.Migrate();
 
         using UserDbContext userDbContext = scope.ServiceProvider.GetRequiredService<UserDbContext>();
         userDbContext.Database.Migrate();

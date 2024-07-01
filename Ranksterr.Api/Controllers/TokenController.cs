@@ -59,7 +59,7 @@ public class TokenController : ControllerBase
         return Results.Json( result );
     }
 
-    private static async Task<ApplicationUser?> GetUserFromClaimsPrincipal(
+    public static async Task<ApplicationUser?> GetUserFromClaimsPrincipal(
         ClaimsPrincipal claimsPrincipal, UserManager<ApplicationUser> userManager )
     {
         try

@@ -103,8 +103,6 @@ public class Program
         app.MapControllers();
         app.MapFallbackToFile( "index.html" );
         
-        // app.MapEndpoints();
-        //
         // app.MapGet( "/api/values", async ( ILogger<Program> logger, IConfiguration configuration ) =>
         // {
         //     TMDbClient client = new TMDbClient( configuration["TMDB-API-KEY"] );

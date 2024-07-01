@@ -40,9 +40,9 @@ public static class DependencyInjection
                .AddEntityFrameworkStores<UserDbContext>()
                .AddDefaultTokenProviders();
         
-        services.AddDbContext<ApplicationDbContext>( options => options.UseSqlServer( connectionString ) );
-        
-        services.AddScoped<IUnitOfWork>( sp => sp.GetRequiredService<ApplicationDbContext>() );
+        // services.AddDbContext<ApplicationDbContext>( options => options.UseSqlServer( connectionString ) );
+        //
+        // services.AddScoped<IUnitOfWork>( sp => sp.GetRequiredService<ApplicationDbContext>() );
         
     }
     private static void AddSettings(IServiceCollection services, IConfiguration configuration)

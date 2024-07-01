@@ -109,7 +109,7 @@ public class UserSeeding
     public static void SeedApplication( WebApplication app )
     {
         using var scope = app.Services.CreateScope();
-        scope.ServiceProvider.GetService<ApplicationDbContext>()?.Database.Migrate();
+        scope.ServiceProvider.GetService<UserDbContext>()?.Database.Migrate();
         var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
         var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
         //Seed Users

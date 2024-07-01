@@ -27,12 +27,12 @@ public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStar
         builder.ConfigureServices(services =>
         {
             // Remove the app's ApplicationDbContext registration
-            var appDbDescriptor = services.SingleOrDefault(
-                d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
-            if (appDbDescriptor != null)
-            {
-                services.Remove(appDbDescriptor);
-            }
+            // var appDbDescriptor = services.SingleOrDefault(
+            //     d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
+            // if (appDbDescriptor != null)
+            // {
+            //     services.Remove(appDbDescriptor);
+            // }
 
             // Remove the app's UserDbContext registration
             var userDbDescriptor = services.SingleOrDefault(
@@ -43,10 +43,10 @@ public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStar
             }
 
             // Add ApplicationDbContext using an in-memory database for testing
-            services.AddDbContext<ApplicationDbContext>(options =>
-            {
-                options.UseInMemoryDatabase("InMemoryAppDbForTesting");
-            });
+            // services.AddDbContext<ApplicationDbContext>(options =>
+            // {
+            //     options.UseInMemoryDatabase("InMemoryAppDbForTesting");
+            // });
 
             // Add UserDbContext using an in-memory database for testing
             services.AddDbContext<UserDbContext>(options =>
@@ -61,24 +61,24 @@ public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStar
             using (var scope = serviceProvider.CreateScope())
             {
                 var scopedServices = scope.ServiceProvider;
-                var appDb = scopedServices.GetRequiredService<ApplicationDbContext>();
+                // var appDb = scopedServices.GetRequiredService<ApplicationDbContext>();
                 var userDb = scopedServices.GetRequiredService<UserDbContext>();
                 var logger = scopedServices.GetRequiredService<ILogger<CustomWebApplicationFactory<TStartup>>>();
 
                 // Ensure the databases are created
-                appDb.Database.EnsureCreated();
+                // appDb.Database.EnsureCreated();
                 userDb.Database.EnsureCreated();
 
                 try
                 {
                     // Apply migrations to ApplicationDbContext
-                    appDb.Database.Migrate();
+                    // appDb.Database.Migrate();
 
                     // Apply migrations to UserDbContext
                     userDb.Database.Migrate();
 
                     // Seed the databases with test data
-                    SeedApplicationData(appDb);
+                    // SeedApplicationData(appDb);
                     SeedUserData(userDb);
                 }
                 catch (Exception ex)
@@ -89,12 +89,12 @@ public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStar
         });
     }
 
-    private void SeedApplicationData(ApplicationDbContext context)
-    {
-        // Add seed data for ApplicationDbContext here
-        //context.YourEntities.Add(new YourEntity { /* ... */ });
-        context.SaveChanges();
-    }
+    // private void SeedApplicationData(ApplicationDbContext context)
+    // {
+    //     // Add seed data for ApplicationDbContext here
+    //     //context.YourEntities.Add(new YourEntity { /* ... */ });
+    //     context.SaveChanges();
+    // }
 
     private void SeedUserData(UserDbContext context)
     {

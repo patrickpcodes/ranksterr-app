@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[Gauntlets]
+(
+	GauntletId UNIQUEIDENTIFIER PRIMARY KEY,
+    CreatedAt DATETIME DEFAULT GETDATE()
+)
