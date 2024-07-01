@@ -48,7 +48,15 @@ jobs:
         with:
           dotnet-version: '8.x'
           include-prerelease: true
-     
+      
+      - name: Write secret to config file
+        env:
+          API_SETTINGS: ${{secrets.RANKSTERR_API_APPSETTINGS}}
+        shell: bash
+        run: |
+            echo "$API_SETTINGS" > Ranksterr.Api/appsettings.json
+            cat Ranksterr.Api/appsettings.json
+          
       - name: Run Ranksterr Application Tests 
         run: | 
           dotnet test Ranksterr.Application.UnitTests/Ranksterr.Application.UnitTests.csproj --configuration Release --logger "trx;LogFileName=test-results-RApp.trx" || true
@@ -70,15 +78,7 @@ jobs:
           reporter: dotnet-trx
           fail-on-error: true
           token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Write secret to config file
-        env:
-          API_SETTINGS: ${{secrets.RANKSTERR_API_APPSETTINGS}}
-        shell: bash
-        run: |
-            echo "$API_SETTINGS" > Ranksterr.Api/appsettings.json
-            cat Ranksterr.Api/appsettings.json
-        
+     
       - name: Build with dotnet
         run: |
           cd Ranksterr.Api/
